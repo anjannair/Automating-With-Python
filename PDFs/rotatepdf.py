@@ -1,6 +1,7 @@
 import PyPDF2
 from PyPDF2 import PdfFileWriter, PdfFileReader
 import time,sys,os
+from tqdm import tqdm
 pdfname = input("Enter the name of your file (example: Hello.pdf) :")
 pdfname =pdfname.strip()
 if pdfname.endswith(".pdf") == False:
@@ -19,10 +20,8 @@ for pageNum in range(pdfReader.numPages):
 angle = input("What angle (90/270/180): ")
 clock = input("Clockwise or AntiClockwise (c/ac): ")
 if clock == "c":
-    time.sleep(5)
     newpage.rotateClockwise(int(angle))
 elif clock == "ac":
-    time.sleep(5)
     newpage.rotateCounterClockwise(int(angle))
 pdfWriter.addPage(newpage)
 resultPdfFile = open('rotatedPage.pdf', 'wb')
@@ -32,10 +31,6 @@ resultPdfFile1 = open('rotatedPage.pdf', 'rb')
 pdfReader1 = PyPDF2.PdfFileReader(resultPdfFile1)
 pageObj = pdfReader1.getPage(0)
 pdfWriter.addPage(pageObj)
-#if int(page) != pdfReader.numPages:
-#    for pageNum in range(int(page)-1,pdfReader.numPages):
-#        pageObj = pdfReader.getPage(pageNum)
-#        pdfWriter.addPage(pageObj)
 pdfOutputFile = open('combinedfile.pdf', 'wb')
 pdfWriter.write(pdfOutputFile)
 pdfOutputFile.close()
@@ -48,7 +43,9 @@ for i in range(pdffinal.getNumPages()-2):
 
 with open('final.pdf', 'wb') as f:
     output.write(f)
-
+print("CONFIGURING...")
+for i in tqdm(range(5)):
+    time.sleep(3)
 print("DONE!")
 resultPdfFile1.close()
 pdfget.close()

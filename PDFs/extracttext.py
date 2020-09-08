@@ -4,6 +4,7 @@
 import PyPDF2
 import sys
 import time
+from tqdm import tqdm
 pdfname = input("Enter the name of your file (example: Hello.pdf) :")
 pdfname =pdfname.strip()
 if pdfname.endswith(".pdf") == False:
@@ -20,9 +21,10 @@ while True:
         page = input("Which page number? :")
         pageObj = pdfReader.getPage(int(page)-1)
         print("Extracting text......")
-        time.sleep(5)
         with open("extractedtext.txt","a") as f:
             f.write(pageObj.extractText() + "\n")
+        for i in tqdm(range(5)):
+            time.sleep(3)
         print("DONE!")
         break
     elif ans=="a":
@@ -31,7 +33,8 @@ while True:
             pageObj = pdfReader.getPage(x)
             with open("extractedtext.txt","a") as f:
                 f.write(pageObj.extractText() + "\n")
-        time.sleep(5)
+        for i in tqdm(range(5)):
+            time.sleep(3)
         print("DONE!")
         break
 pdfFileObj.close()
