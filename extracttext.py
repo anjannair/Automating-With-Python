@@ -1,3 +1,6 @@
+#Before all this run the command pip install --user PyPDF2==1.26.0
+#Shift + right click will bring up the powershell/cmd for the folder
+#Ensure file is in the same folder and has the extension .pdf
 import PyPDF2
 import sys
 import time
